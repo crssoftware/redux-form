@@ -2750,7 +2750,7 @@ describe('createReduxForm', () => {
     );
   });
 
-  it('should throw when trying to access the wrapped instance if withRef is not specified', () => {
+  it('should throw when trying to access the wrapped instance if forwardRef is not specified', () => {
     const store = makeStore();
 
     class Container extends Component {
@@ -2772,7 +2772,7 @@ describe('createReduxForm', () => {
 
     const decorated = TestUtils.findRenderedComponentWithType(dom, DecoratedForm);
     expect(() => decorated.getWrappedInstance()).toThrow(
-      /To access the wrapped instance, you need to specify \{ withRef: true \} as the fourth argument of the connect\(\) call\./
+      /To access the wrapped instance, you need to specify \{ forwardRef: true \} as the fourth argument of the connect\(\) call\./
     );
   });
 
@@ -2798,7 +2798,7 @@ describe('createReduxForm', () => {
     const DecoratedForm = reduxForm({
       form: 'withRefTest',
       fields: ['foo', 'bar']
-    }, null, null, null, {withRef: true})(Container);
+    }, null, null, null, {forwardRef: true})(Container);
 
     const dom = TestUtils.renderIntoDocument(
       <Provider store={store}>
