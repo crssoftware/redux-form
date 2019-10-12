@@ -16,6 +16,15 @@ const createRestorableSpy = (fn) => {
     this.calls = [];
   });
 };
+class Wrapper extends React.Component {
+  render() { 
+    return this.props.children
+  }
+}
+
+function renderIntoDocument(element) {
+  return TestUtils.renderIntoDocument(<Wrapper>{element}</Wrapper>)
+}
 
 describe('createReduxForm', () => {
   const reduxForm = createReduxForm(false, React, connect);
@@ -82,7 +91,7 @@ describe('createReduxForm', () => {
         form: 'testForm',
         fields: [ 'foo', 'bar' ]
       })(Form);
-      TestUtils.renderIntoDocument(
+      renderIntoDocument(
         <Provider store={store}>
           <Decorated/>
         </Provider>
@@ -96,7 +105,7 @@ describe('createReduxForm', () => {
       form: 'testForm',
       fields: [ 'foo', 'bar' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -135,7 +144,7 @@ describe('createReduxForm', () => {
       form: 'testForm',
       fields: [ 'foo', 'bar' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated initialValues={{foo: 'fooValue', bar: 'barValue'}}/>
       </Provider>
@@ -175,7 +184,7 @@ describe('createReduxForm', () => {
       form,
       fields: [ 'foo', 'bar' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -219,7 +228,7 @@ describe('createReduxForm', () => {
       form,
       fields: [ 'foo', 'bar' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -263,7 +272,7 @@ describe('createReduxForm', () => {
       fields: [ 'foo', 'bar' ],
       touchOnBlur: false
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -306,7 +315,7 @@ describe('createReduxForm', () => {
       form,
       fields: [ 'foo', 'bar' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -350,7 +359,7 @@ describe('createReduxForm', () => {
       fields: [ 'foo', 'bar' ],
       touchOnChange: true
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -393,7 +402,7 @@ describe('createReduxForm', () => {
       form,
       fields: [ 'foo', 'bar' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -440,7 +449,7 @@ describe('createReduxForm', () => {
       form,
       fields: [ 'foo', 'bar' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated initialValues={{foo: 'fooValue', bar: 'barValue'}}/>
       </Provider>
@@ -483,7 +492,7 @@ describe('createReduxForm', () => {
       form,
       fields: [ 'children[].name' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated initialValues={{children: [{name: 'Tom'}, {name: 'Jerry'}]}}/>
       </Provider>
@@ -552,7 +561,7 @@ describe('createReduxForm', () => {
       form,
       fields: [ 'foo', 'bar' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -608,7 +617,7 @@ describe('createReduxForm', () => {
         return errors;
       }
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated initialValues={{foo: 'fooValue', bar: 'barValue'}}/>
       </Provider>
@@ -696,7 +705,7 @@ describe('createReduxForm', () => {
         return errors;
       }
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated initialValues={{foo: {bar: 'fooBar'}}}/>
       </Provider>
@@ -760,7 +769,7 @@ describe('createReduxForm', () => {
         return errors;
       }
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated initialValues={{foo: ['fooBar'], bar: [{name: ''}]}}/>
       </Provider>
@@ -919,7 +928,7 @@ describe('createReduxForm', () => {
       fields: [ 'foo', 'bar' ],
       readonly: true
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -963,7 +972,7 @@ describe('createReduxForm', () => {
         children: [ { name: 'Tom' }, { name: 'Jerry' } ]
       }
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -1022,7 +1031,7 @@ describe('createReduxForm', () => {
       fields: [ 'foo', 'bar' ],
       readonly: true
     })(FormComponent);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated onSubmit={submit}/>
       </Provider>
@@ -1063,7 +1072,7 @@ describe('createReduxForm', () => {
       fields: [ 'foo', 'bar' ],
       readonly: true
     })(FormComponent);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated onSubmit={submit}/>
       </Provider>
@@ -1088,7 +1097,7 @@ describe('createReduxForm', () => {
         bar: 'cat'
       }
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -1114,7 +1123,7 @@ describe('createReduxForm', () => {
         bar: 'cat'
       }
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -1136,7 +1145,7 @@ describe('createReduxForm', () => {
       asyncValidate,
       asyncBlurFields: [ 'foo' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -1165,7 +1174,7 @@ describe('createReduxForm', () => {
       asyncValidate,
       asyncBlurFields: [ 'foo[].name' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -1203,7 +1212,7 @@ describe('createReduxForm', () => {
         bar: 'cat'
       }
     })(FormComponent);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -1232,7 +1241,7 @@ describe('createReduxForm', () => {
         bar: 'cat'
       }
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -1271,7 +1280,7 @@ describe('createReduxForm', () => {
       fields: [ 'foo', 'bar' ],
       readonly: true
     })(FormComponent);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated />
       </Provider>
@@ -1313,7 +1322,7 @@ describe('createReduxForm', () => {
       fields: [ 'foo', 'bar' ],
       readonly: true
     })(FormComponent);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated />
       </Provider>
@@ -1333,7 +1342,7 @@ describe('createReduxForm', () => {
         children: [ 1, 2 ]
       }
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -1363,7 +1372,7 @@ describe('createReduxForm', () => {
         colors: [ 'red', 'blue' ]
       }
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -1411,7 +1420,7 @@ describe('createReduxForm', () => {
         ]
       }
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -1452,7 +1461,7 @@ describe('createReduxForm', () => {
       form,
       fields: [ 'users[].name', 'users[].age' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -1525,7 +1534,7 @@ describe('createReduxForm', () => {
         'acknowledgements.show'
       ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -1586,7 +1595,7 @@ describe('createReduxForm', () => {
         'proposals[].meta.items[].name'
       ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -1761,7 +1770,7 @@ describe('createReduxForm', () => {
   //    form,
   //    fields: ['tags[]']
   //  })(Form);
-  //  const dom = TestUtils.renderIntoDocument(
+  //  const dom = renderIntoDocument(
   //    <Provider store={store}>
   //      <Decorated/>
   //    </Provider>
@@ -1798,7 +1807,7 @@ describe('createReduxForm', () => {
       form,
       fields: [ 'children' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -1863,7 +1872,7 @@ describe('createReduxForm', () => {
       form,
       fields: [ 'name' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated initialValues={{name: 'Bob'}}/>
       </Provider>
@@ -1912,7 +1921,7 @@ describe('createReduxForm', () => {
       });
 
     // should NOT dispatch INITIALIZE this time
-    const dom2 = TestUtils.renderIntoDocument(
+    const dom2 = renderIntoDocument(
       <Provider store={store}>
         <Decorated initialValues={{name: 'Bob'}}/>
       </Provider>
@@ -1968,7 +1977,7 @@ describe('createReduxForm', () => {
       form,
       fields: [ 'name' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -2022,7 +2031,7 @@ describe('createReduxForm', () => {
       fields: [ 'name' ],
       validate: () => ({ name: deepError })
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -2055,7 +2064,7 @@ describe('createReduxForm', () => {
       initialValues: { name: 'Tom' },
       asyncValidate: () => Promise.reject({ name: deepError })
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -2118,7 +2127,7 @@ describe('createReduxForm', () => {
       initialValues: { name: 'Tom' },
       onSubmit: () => Promise.reject({ name: deepError })
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -2170,7 +2179,7 @@ describe('createReduxForm', () => {
       form,
       fields: [ 'larry', 'moe', 'curly' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -2195,7 +2204,7 @@ describe('createReduxForm', () => {
       form,
       fields: [ 'address.street', 'address.postalCode' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -2220,7 +2229,7 @@ describe('createReduxForm', () => {
       form,
       fields: [ 'contact.shipping.phones[]', 'contact.billing.phones[]' ]
     })(Form);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated/>
       </Provider>
@@ -2292,7 +2301,7 @@ describe('createReduxForm', () => {
       }
     }
 
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <StatefulContainer/>
       </Provider>
@@ -2377,7 +2386,7 @@ describe('createReduxForm', () => {
       }
     }
 
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <StatefulContainer/>
       </Provider>
@@ -2448,7 +2457,7 @@ describe('createReduxForm', () => {
       }
     }
 
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Container/>
       </Provider>
@@ -2500,7 +2509,7 @@ describe('createReduxForm', () => {
       }
     }
 
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Container/>
       </Provider>
@@ -2544,7 +2553,7 @@ describe('createReduxForm', () => {
       fields: [ 'name' ]
     })(BarForm);
 
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <div>
           <DecoratedFooForm/>
@@ -2623,7 +2632,7 @@ describe('createReduxForm', () => {
       fields: [ 'foo', 'bar' ]
     })(FieldTestForm);
 
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <DecoratedForm/>
       </Provider>
@@ -2663,7 +2672,7 @@ describe('createReduxForm', () => {
   //    form,
   //    fields: ['name']
   //  })(Form);
-  //  const dom = TestUtils.renderIntoDocument(
+  //  const dom = renderIntoDocument(
   //    <Provider store={store}>
   //      <Decorated/>
   //    </Provider>
@@ -2692,7 +2701,7 @@ describe('createReduxForm', () => {
   //    form,
   //    fields: ['kennel', 'dogs[].name', 'dogs[].breed']
   //  })(Form);
-  //  const dom = TestUtils.renderIntoDocument(
+  //  const dom = renderIntoDocument(
   //    <Provider store={store}>
   //      <Decorated initialValues={{
   //        kennel: 'Bob\'s Dog House',
@@ -2743,7 +2752,7 @@ describe('createReduxForm', () => {
       form,
       fields: ['mingzi']
     })(InitialValuesTestForm);
-    TestUtils.renderIntoDocument(
+    renderIntoDocument(
       <Provider store={store}>
         <Decorated initialValues={{mingzi: 'Bob'}}/>
       </Provider>
@@ -2764,7 +2773,7 @@ describe('createReduxForm', () => {
       fields: ['foo', 'bar']
     })(Container);
 
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <DecoratedForm />
       </Provider>
@@ -2800,7 +2809,7 @@ describe('createReduxForm', () => {
       fields: ['foo', 'bar']
     }, null, null, null, {forwardRef: true})(Container);
 
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <DecoratedForm />
       </Provider>
@@ -2849,7 +2858,7 @@ describe('createReduxForm', () => {
       form: 'testForm',
       fields: [ 'foo.bar' ]
     })(FormComponent);
-    const dom = TestUtils.renderIntoDocument(
+    const dom = renderIntoDocument(
       <Provider store={store}>
         <Decorated initialValues={{
           foo: {
@@ -2917,7 +2926,7 @@ describe('createReduxForm', () => {
       company: { name: 'Foo' }
     };
 
-    TestUtils.renderIntoDocument(
+    renderIntoDocument(
       <Provider store={store}>
         <Decorated initialValues={initialValues} />
       </Provider>
