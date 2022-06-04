@@ -44,7 +44,8 @@
     "invariant": "^2.0.0",
     "is-promise": "^2.1.0",
     "prop-types": "^15.5.8",
-    "react-lazy-cache": "^3.0.1"
+    "react-lazy-cache": "^3.0.1",
+    "redux-form": "^8.3.8"
   },
   "devDependencies": {
     "babel-cli": "^6.3.17",
